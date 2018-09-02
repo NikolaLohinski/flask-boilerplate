@@ -1,4 +1,4 @@
-version: '3.4'
+version: '2.0'
 services:
   postgres:
     container_name: postgres
@@ -29,4 +29,3 @@ services:
 
 volumes:
   flask-app-db:
-    name: flask-app-db

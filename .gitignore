@@ -7,5 +7,9 @@ migrations/
 postgres-data/
 .mypy_cache
 .pytest_cache
-api.log
+server.log
 test.db
+.idea
+node_modules/
+server/static/
+server/templates/

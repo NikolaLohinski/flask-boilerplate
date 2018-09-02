@@ -9,7 +9,7 @@ import pytest
 import sqlalchemy
 from flask_migrate import Migrate
 
-from api import create_app
+from server import create_app
 
 SQLITE_FILE_PATH = f"{os.getcwd()}/test.db"
 
