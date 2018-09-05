@@ -3,7 +3,7 @@ services:
   postgres:
     container_name: postgres
     restart: always
-    image: postgres:10
+    build: ./db
     environment:
       - POSTGRES_USER=${POSTGRES_USER}
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
@@ -11,7 +11,7 @@ services:
     volumes:
       - db-volume:/var/lib/postgresql/data
     ports:
-      - "5432:5432"
+      - 5432:5432
   flask:
     container_name: flask
     restart: always
