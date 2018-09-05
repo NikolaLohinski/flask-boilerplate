@@ -27,6 +27,15 @@ services:
       - postgres
     entrypoint: 
       - /api/init.sh
-
+  webpack:
+    container_name: webpack
+    restart: always
+    build: ./front
+    ports:
+      - 8080:8080
+    volumes:
+      - ./front:/bindmount:rw
+      - node_modules:/bindmount/node_modules
 volumes:
   db-volume:
+  node_modules:
