@@ -1,7 +1,8 @@
 from flask_script import Manager
 from flask_migrate import Migrate, MigrateCommand
-from server import create_app
-from server.models import db
+from core import create_app
+from core.views import v0
+from core.models import db
 
 app = create_app()
 
@@ -27,9 +28,7 @@ def recreate_db():
     Recreates a local database. You probably should not use this on
     production.
     """
-    db.drop_all()
-    db.create_all()
-    db.session.commit()
+    v0.re_init_db()
 
 
 if __name__ == "__main__":

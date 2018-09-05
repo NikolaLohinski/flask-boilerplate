@@ -6,8 +6,8 @@ from flask_cors import CORS
 from flask_migrate import Migrate
 from sqlalchemy_utils import create_database, database_exists
 
-from server.config import config
-from server.core import all_exception_handler
+from core.config import config
+from core.utils import all_exception_handler
 
 
 class RequestFormatter(logging.Formatter):
@@ -54,16 +54,15 @@ def create_app(test_config=None):
             create_database(db_url)
 
     # register sqlalchemy to this app
-    from server.models import db
+    from core.models import db
 
     db.init_app(app)
     Migrate(app, db)
 
     # import and register blueprints
-    from server.views import main, rest
+    from core.views import v0
 
-    app.register_blueprint(rest.rest, url_prefix='/api/v0')
-    app.register_blueprint(main.main)
+    app.register_blueprint(v0.v0, url_prefix='/api/v0')
 
     # register error Handler
     app.register_error_handler(Exception, all_exception_handler)

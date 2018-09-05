@@ -1,5 +1,5 @@
 *
-!server
+!core
 !manage.py
 !Pipfile
 !Pipfile.lock

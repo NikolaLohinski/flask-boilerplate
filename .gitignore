@@ -10,6 +10,6 @@ postgres-data/
 server.log
 test.db
 .idea
-node_modules/
-server/static/
-server/templates/
+.env
+api/core/static/
+api/core/templates/

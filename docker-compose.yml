@@ -9,23 +9,24 @@ services:
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
       - POSTGRES_DB=${POSTGRES_DB}
     volumes:
-      - flask-app-db:/var/lib/postgresql/data
+      - db-volume:/var/lib/postgresql/data
     ports:
       - "5432:5432"
-  app:
-    container_name: app
+  flask:
+    container_name: flask
     restart: always
-    build: .
+    build: ./api
     environment:
       - FLASK_ENV=docker
+      - DEFAULT_INVENTIONS_FILE_PATH=/api/data/inventions.json
     ports:
       - 5000:5000
     volumes:
-      - .:/app
+      - ./api:/api
     depends_on:
       - postgres
     entrypoint: 
-      - /app/docker_script.sh
+      - /api/init.sh
 
 volumes:
-  flask-app-db:
+  db-volume:
