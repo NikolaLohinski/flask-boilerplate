@@ -2,7 +2,6 @@ import os
 import json
 from flask import Blueprint, request
 from ..models import db
-from sqlalchemy.sql import func
 from core.models import Invention
 from core.utils import create_response, serialize_list
 
@@ -17,12 +16,10 @@ def get_all_inventions():
     })
 
 
-@v0.route('/inventions/<int:sample>', methods=['GET'])
-def get_sample_inventions(sample):
-    number = int(sample)
-    inventions = Invention.query.order_by(func.random()).limit(number)
+@v0.route('/inventions/<int:_id>', methods=['GET'])
+def get_invention(_id):
     return create_response(data={
-        'inventions': serialize_list(inventions)
+        'inventions': Invention.query.get(_id).to_dict()
     })
 
 
