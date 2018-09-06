@@ -120,11 +120,12 @@
       left: 50%;
       transform: translate(-50%, -50%);
       width: 90vw;
-      max-width: 400px;
+      max-width: $max-width;
       text-align: center;
       article.slider {
         margin: 45px auto;
         width: 80vw;
+        max-width: $max-width;
       }
     }
     .result {
