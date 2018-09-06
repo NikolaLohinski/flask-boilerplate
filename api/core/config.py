@@ -1,26 +1,23 @@
 import os
 
+USER = os.environ.get('POSTGRES_USER')
+PASSWORD = os.environ.get('POSTGRES_PASSWORD')
+DATABASE = os.environ.get('POSTGRES_DB')
+
 
 class Config:
-    SECRET_KEY = "testkey"
+    SECRET_KEY = 'testkey'
     SQLALCHEMY_TRACK_MODIFICATIONS = False
-    LOG_FILE = "api.log"
+    LOG_FILE = 'api.log'
 
 
 class DevelopmentConfig(Config):
-    SQLALCHEMY_DATABASE_URI = "postgresql://testusr:password@127.0.0.1:5432/testdb"
-    # SQLALCHEMY_DATABASE_URI = 'postgres://127.0.0.1:5432'
+    SQLALCHEMY_DATABASE_URI = 'postgresql://{}:{}@postgres/{}'.format(
+        USER, PASSWORD, DATABASE
+    )
     DEBUG = True
 
 
-class ProductionConfig(Config):
-    SQLALCHEMY_DATABASE_URI = os.environ.get("DATABASE_URL")
-    DEBUG = False
-
-
-class DockerDevConfig(Config):
-    SQLALCHEMY_DATABASE_URI = "postgresql://testusr:password@postgres/testdb"
-    DEBUG = True
-
-
-config = {"dev": DevelopmentConfig, "prod": ProductionConfig, "docker": DockerDevConfig}
+config = {
+    'dev': DevelopmentConfig
+}

@@ -17,8 +17,11 @@ services:
     restart: always
     build: ./api
     environment:
-      - FLASK_ENV=docker
+      - FLASK_ENV=dev
       - DEFAULT_INVENTIONS_FILE_PATH=/api/data/inventions.json
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_DB=${POSTGRES_DB}
     ports:
       - 5000:5000
     volumes:

@@ -88,6 +88,13 @@
         "origin": "France"
     },
     {
+        "date": 1795,
+        "name": "L'invention de la conserve",
+        "inventor":"Nicolas Apert",
+        "origin": "France",
+        "site": "https://www.laconserve.com/ca-vous-etonne/la-conserve-une-invention-de-genie-depuis-1795-2"
+    },
+    {
         "date": 1799,
         "name": "L'adoption du système métrique en France"
     },

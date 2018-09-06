@@ -6,10 +6,19 @@
     "start": "npm run webpack-server -- --host 0.0.0.0 --port 8080 --hot --inline"
   },
   "dependencies": {
-    "font-awesome": "^4.7.0",
+    "@fortawesome/fontawesome-svg-core": "^1.2.4",
+    "@fortawesome/free-solid-svg-icons": "^5.3.1",
+    "@fortawesome/vue-fontawesome": "^0.1.1",
+    "bootstrap-css-only": "^4.1.1",
+    "i": "^0.3.6",
     "interactjs": "^1.3.4",
+    "npm": "^6.4.1",
     "vue": "^2.3.3",
-    "vue-resource": "^1.3.5"
+    "vue-awesome-form": "^1.0.4",
+    "vue-js-modal": "^1.3.26",
+    "vue-promise-btn": "^1.1.0",
+    "vue-resource": "^1.3.5",
+    "vue-slider-component": "^2.7.7"
   },
   "devDependencies": {
     "babel-core": "^6.24.0",

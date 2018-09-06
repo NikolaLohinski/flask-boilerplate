@@ -2,6 +2,7 @@ import os
 import json
 from flask import Blueprint, request
 from ..models import db
+from sqlalchemy.sql import func
 from core.models import Invention
 from core.utils import create_response, serialize_list
 
@@ -16,10 +17,17 @@ def get_all_inventions():
     })
 
 
+@v0.route('/inventions/random', methods=['GET'])
+def get_random_invention():
+    return create_response(data={
+        'invention': Invention.query.order_by(func.random()).first().to_dict()
+    })
+
+
 @v0.route('/inventions/<int:_id>', methods=['GET'])
 def get_invention(_id):
     return create_response(data={
-        'inventions': Invention.query.get(_id).to_dict()
+        'invention': Invention.query.get(_id).to_dict()
     })
 
 
@@ -48,16 +56,19 @@ def re_init_db():
 @v0.route('/inventions', methods=['POST'])
 def post_inventions():
     invention = request.get_json()
-    db.session.add(Invention(
+    db_invention = Invention(
         name=invention.get('name'),
         date=invention.get('date'),
         origin=invention.get('origin'),
         inventor=invention.get('inventor'),
         site=invention.get('site')
-    ))
+    )
+    db.session.add(db_invention)
     db.session.commit()
     return create_response(data={
-        'invention': invention
+        'invention': Invention.query.filter(
+            Invention.name == invention.get('name')
+        ).first().to_dict()
     }, message='Saved record')
 
 
