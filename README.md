@@ -37,3 +37,12 @@ Then you may visit :
     GET | http://localhost:5000/api/v0/inventions
   ```
 NOTE: if you are running on Mac or Windows, you may need to replace `localhost` with the ip address of the container, which you may retrieve by inspecting the running container : `docker inspect <CONTAINER_ID or CONTAINER_NAME>` (Use `docker ps` to get information on the running containers)
+
+## Tests
+
+Currently, only the Flask API is testable through [`pytest`](https://docs.pytest.org/en/latest/) for unit tests. It is done outside of the docker container. To launch tests :
+- Install [python 3.7](https://www.python.org/downloads/release/python-370/)
+- Install pyenv with pip : `pip install pipenv`
+- Go to `api` directory : `cd api`
+- Install project dev dependencies : `pipenv install --dev`
+- Start test suit : `pipenv run pytest tests`
