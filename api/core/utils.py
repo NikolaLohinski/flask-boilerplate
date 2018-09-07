@@ -1,8 +1,12 @@
-from typing import Tuple, List
+# -*- coding: utf-8 -*-
+"""
+Utilities for logging and response formatting
 
+@author: NikolaLohinski (https://github.com/NikolaLohinski)
+@date: 02/02/09
+"""
 from werkzeug.local import LocalProxy
 from flask import current_app, jsonify
-from flask.wrappers import Response
 
 # logger object for all views to use
 logger = LocalProxy(lambda: current_app.logger)

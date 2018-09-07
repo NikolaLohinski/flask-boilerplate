@@ -1,3 +1,10 @@
+# -*- coding: utf-8 -*-
+"""
+Initialisation of Flask API
+
+@author: NikolaLohinski (https://github.com/NikolaLohinski)
+@date: 02/02/09
+"""
 import os
 import logging
 
@@ -11,6 +18,7 @@ from core.utils import all_exception_handler
 
 
 class RequestFormatter(logging.Formatter):
+    """API request formater"""
     def format(self, record):
         record.url = request.url
         record.remote_addr = request.remote_addr
@@ -18,6 +26,10 @@ class RequestFormatter(logging.Formatter):
 
 
 def create_app(test_config=None):
+    """Main initialisation function to call to start API
+    :param test_config: optional test configuration
+    :return: Flask.app: the Flask app
+    """
     app = Flask(__name__)
 
     CORS(app)  # add CORS

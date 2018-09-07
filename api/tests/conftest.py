@@ -1,13 +1,21 @@
+# -*- coding: utf-8 -*-
+"""
+Pytest fixtures for unit testing of API
+
+@author: NikolaLohinski (https://github.com/NikolaLohinski)
+@date: 02/02/09
+"""
 import os
 import time
 import pytest
 from core import create_app
 
+
 SQLITE_FILE_PATH = f"{os.getcwd()}/test.db"
 
-# testing using sqlite, which may
-# not be the same as testing with
-# postgres but for unit tests, this will do
+
+# testing using sqlite, which may not be the same as testing with postgres but
+# for unit tests, this will do
 @pytest.fixture(scope="session")
 def client():
     config_dict = {

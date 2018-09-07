@@ -1,6 +1,11 @@
+/**
+ * Main entry of the front end to initialize vue and add plugins
+ *
+ * @author: NikolaLohinski (https://github.com/NikolaLohinski)
+ * @date: 05/09/2018
+ */
 'use strict';
 if (!Object.assign) Object.assign = require('object.assign').getPolyfill();
-
 import Vue from 'vue';
 import VueResource from 'vue-resource';
 import Root from '../vue/root.vue';

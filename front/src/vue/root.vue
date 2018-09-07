@@ -27,6 +27,8 @@
         <vue-slider ref="slider"
                     v-model="response"
                     :fixed="true"
+                    :dot-size="15"
+                    :height="15"
                     :processDraggable="true"
                     :min="1000"
                     :max="2018">
@@ -60,6 +62,12 @@
   </div>
 </template>
 <script>
+  /**
+   * Root vue component containing the app.
+   *
+   * @author: NikolaLohinski (https://github.com/NikolaLohinski)
+   * @date: 05/09/2018
+   */
   import vueSlider from 'vue-slider-component';
   const API_URL = `${window.location.protocol}//${window.location.hostname}:5000/api/v0`;
   export default {
@@ -73,12 +81,20 @@
       };
     },
     computed: {
+      /**
+       * Computed variable success to define if the player answered correctly
+       * @return {boolean} true if the player answered correctly, false otherwise
+       */
       success () {
         return this.invention &&
           (this.response[0] <= this.invention.date && this.invention.date <= this.response[1]);
       }
     },
     methods: {
+      /**
+       * Start function to call to get a random invention and start (or restart) the game
+       * @return {Promise} Promise to resolve once we get the request
+       */
       start () {
         this.introduced = true;
         return new Promise((resolve, reject) => {
@@ -91,6 +107,10 @@
           }, reject);
         });
       },
+      /**
+       * Show result modal stating if the answer is correct or not
+       * @return {Promise} Promise to resolve by showing the modal
+       */
       submit () {
         return new Promise((resolve) => {
           resolve();

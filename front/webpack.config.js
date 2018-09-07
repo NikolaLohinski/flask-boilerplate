@@ -3,7 +3,7 @@ const HTMLWebpackPlugin = require('html-webpack-plugin');
 const TransformModulesPlugin = require('webpack-transform-modules-plugin');
 module.exports = {
   entry: {
-    'app.js': './src/js/main.js'
+    'app.js': require('path').resolve(__dirname, 'src', 'js', 'main.js')
   },
   output: {
     path: require('path').resolve(__dirname, 'dist'),
@@ -79,7 +79,8 @@ module.exports = {
     new TransformModulesPlugin(),
     new HTMLWebpackPlugin({
       template: 'src/html/index.html',
-      filename: 'index.html'
+      filename: 'index.html',
+      favicon: require('path').resolve(__dirname, 'src', 'img', 'stacklabs.png')
     })
   ]
 };

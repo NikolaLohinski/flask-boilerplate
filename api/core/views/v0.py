@@ -1,3 +1,11 @@
+# -*- coding: utf-8 -*-
+"""
+v0 version of the API views
+
+@author: NikolaLohinski (https://github.com/NikolaLohinski)
+@date: 02/02/09
+"""
+
 import os
 import json
 from flask import Blueprint, request
@@ -11,6 +19,7 @@ v0 = Blueprint('rest', __name__)
 
 @v0.route('/inventions', methods=['GET'])
 def get_all_inventions():
+    """Retrieve all inventions sorted by date then name"""
     inventions = Invention.query.order_by('date', 'name').all()
     return create_response(data={
         'inventions': serialize_list(inventions)
@@ -19,6 +28,7 @@ def get_all_inventions():
 
 @v0.route('/inventions/random', methods=['GET'])
 def get_random_invention():
+    """Pick a random invention in database"""
     return create_response(data={
         'invention': Invention.query.order_by(func.random()).first().to_dict()
     })
@@ -26,6 +36,7 @@ def get_random_invention():
 
 @v0.route('/inventions/<int:_id>', methods=['GET'])
 def get_invention(_id):
+    """Retrieve everything on an invention by id"""
     return create_response(data={
         'invention': Invention.query.get(_id).to_dict()
     })
@@ -33,6 +44,7 @@ def get_invention(_id):
 
 @v0.route('/inventions/init', methods=['PUT'])
 def re_init_db():
+    """Re-initialize database with content of the inventions.json object"""
     db.drop_all()
     db.create_all()
     with open(os.environ['DEFAULT_INVENTIONS_FILE_PATH']) as stream:
@@ -55,6 +67,7 @@ def re_init_db():
 
 @v0.route('/inventions', methods=['POST'])
 def post_inventions():
+    """Add invention to database from passed JSON object"""
     invention = request.get_json()
     db_invention = Invention(
         name=invention.get('name'),
@@ -74,6 +87,7 @@ def post_inventions():
 
 @v0.route('/inventions/<int:_id>', methods=['DELETE'])
 def delete_inventions(_id):
+    """Delete invention by id"""
     invention = Invention.query.get(_id)
     if invention is None:
         raise Exception('Did not found record with id: %s' % _id)

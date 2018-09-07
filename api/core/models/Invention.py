@@ -1,3 +1,10 @@
+# -*- coding: utf-8 -*-
+"""
+Invention table definition through SQLAlchemy model
+
+@author: NikolaLohinski (https://github.com/NikolaLohinski)
+@date: 02/02/09
+"""
 from core.utils import Mixin
 from .base import db
 
