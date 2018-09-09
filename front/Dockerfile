@@ -7,4 +7,4 @@ COPY ./ ./
 
 RUN npm install --no-progress --ignore-optional
 
-CMD npm run start
+CMD npm run watch

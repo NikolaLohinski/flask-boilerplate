@@ -56,7 +56,7 @@
           </p>
           <p>{{ invention.name }} date très exactement de {{ invention.date }}.</p>
         </div>
-        <div v-else>Désolé, mais vous êtes très loin ...</div>
+        <div v-else>Désolé, mais vous êtes loin ...</div>
       </div>
     </modal>
   </div>
