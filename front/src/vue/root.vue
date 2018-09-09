@@ -54,9 +54,9 @@
           <p>
             Bien joué !
           </p>
-          <p>{{ invention.name }} date très exactement de {{ invention.date }}.</p>
+          <p>{{ this.determineMessage }}</p>
         </div>
-        <div v-else>Désolé, mais vous êtes loin ...</div>
+        <div v-else>{{ this.determineMessage }}</div>
       </div>
     </modal>
   </div>
@@ -77,7 +77,12 @@
         introduced: false,
         errorMargin: errorMargin,
         invention: null,
-        response: [1000, 1000 + errorMargin]
+        response: [1000, 1000 + errorMargin],
+        message: {
+          VERYCLOSE: 'Presque ! Il manquait trois fois rien !',
+          CLOSE: 'Désolé, mais ce n\'est pas tout à fait ça...',
+          FAR: 'Aïe, vous étiez très loin !'
+        }
       };
     },
     computed: {
@@ -88,6 +93,26 @@
       success () {
         return this.invention &&
           (this.response[0] <= this.invention.date && this.invention.date <= this.response[1]);
+      },
+      /**
+       * Determine message to display based on answer
+       * @return {string} message to display
+       */
+      determineMessage () {
+        if (!this.invention) return '';
+        const date = this.invention.date;
+        const distance = Math.min(Math.abs(date - this.response[1]), Math.abs(date - this.response[0]));
+        if (this.success) {
+          return `${this.invention.name} date très exactement de ${this.invention.date}.`
+        } else {
+          if (distance < 20) {
+            return this.message.VERYCLOSE;
+          } else if (distance < 100) {
+            return this.message.CLOSE;
+          } else {
+            return this.message.FAR;
+          }
+        }
       }
     },
     methods: {
